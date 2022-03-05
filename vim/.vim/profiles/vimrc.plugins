@@ -1,0 +1,4 @@
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/NERDTree'
+Plug 'gruvbox-community/gruvbox'
+call plug#end()

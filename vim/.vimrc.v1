@@ -1,0 +1,225 @@
+syntax on
+
+" ============================================================================
+" .vimrc of Attila Hegedüs {{{
+" ============================================================================
+
+" }}}
+
+" ============================================================================
+" VIM-PLUG Block {{{
+" ============================================================================
+
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/NERDTree'
+Plug 'gruvbox-community/gruvbox'
+call plug#end()
+
+" }}}
+
+
+" ============================================================================
+" MAPPINGS  {{{
+" ============================================================================
+
+" Set the mapleader key to an empty space instead of an backslash or semicolon
+let mapleader = " "
+
+" Press \\ to jump back to the last cursor position.
+nnoremap <leader>\ ``
+
+" Yank from cursor to the end of line.
+nnoremap Y y$
+
+" ------------------------------------ "
+" NERTree Settings
+" ------------------------------------ "
+" Simple NERDTree commands
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>                  
+nnoremap <C-f> :NERDTreeFind<CR>
+ 
+" Start NERDTree when Vim is opened and leave the cursor in it.
+"autocmd VimEnter * NERDTree
+
+" Start NERDTree when Vim is opened and put the cursor back in the other window.
+"autocmd VimEnter * NERDTree | wincmd p
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif  
+
+" Have nerdtree ignore certain files and directories.
+let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', 
+    \ '\.gif$', '\.db$']
+
+" }}}
+
+" ============================================================================
+" BASIC SETTINGS  {{{
+" ============================================================================
+
+" Set theme for VIM
+colorscheme gruvbox
+"set background=dark
+"autocmd VimEnter * hi! Normal ctermbg=NONE guibg=NONE
+"highlight Normal guibg=NONE ctermbg=NONE
+"highlight Normal ctermbg=none guibg=none
+"highlight SignColumn ctermbg=none guibg=none
+"highlight LineNr ctermbg=none guibg=none
+"autocmd ColorScheme * call s:transparent_backgroung()
+"autocmd vimenter * highlight Normal guibg=NONE ctermbg=NONE
+
+set exrc
+set guicursor=
+set hidden
+set noerrorbells
+set smartindent
+set noswapfile
+set termguicolors
+set completeopt=menuone,noinsert,noselect
+set signcolumn=yes
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (defaulot is 4000 ms = 4 s) leads to noticeable          
+" delays and poor user experience.
+set updatetime=50
+
+" Don't pass messages to |ins-completion-menu|.
+"set shortmessage+=c
+
+" Disable compatibility with vi which can cause unexpected issues.
+set nocompatible
+
+" Enable type file detection. Vim will be able to try to detect the type of file in use.
+filetype on
+
+" Enable plugins and load plugin for the detected file type.
+filetype plugin on
+
+
+" Load an indent file for the detected file type.
+filetype indent on
+
+" Turn syntax highlighting on.
+syntax on
+
+" Add numbers to each line on the left-hand side.
+set number
+set relativenumber
+
+" Highlight cursor line underneath the cursor horizontally.
+"set cursorline
+
+" Highlight cursor line underneath the cursor vertically.
+"set cursorcolumn
+
+" Set shift width to 4 spaces.
+set shiftwidth=4
+
+" Set tab width to 4 columns.
+set tabstop=4 softtabstop=4
+
+" Use space characters instead of tabs.
+set expandtab
+
+" Do not save backup files.
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+" Do not let cursor scroll below or above N number of lines when scrolling.
+set scrolloff=10
+
+" Do not wrap lines. Allow long lines to extend as far as the line goes.
+set nowrap
+
+" While searching though a file incrementally highlight matching characters as you type.
+set incsearch
+
+" Ignore capital letters during search.
+set ignorecase
+
+" Override the ignorecase option if searching for capital letters.
+" This will allow you to search specifically for capital letters.
+set smartcase
+
+" Show partial command you type in the last line of the screen.
+set showcmd
+
+" Show the mode you are on the last line.
+set noshowmode
+
+" Show matching words during a search.
+set showmatch
+
+" Use highlighting when doing a search.
+set nohlsearch
+
+" Set the commands to save in history default number is 20.
+set history=1000
+
+" Enable auto completion menu after pressing TAB.
+set wildmenu
+
+" Make wildmenu behave like similar to Bash completion.
+set wildmode=list:longest
+
+" There are certain files that we would never want to edit with Vim.
+" Wildmenu will ignore files with these extensions.
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" }}}
+
+
+" ============================================================================
+" VIMSCRIPT  {{{
+" ============================================================================
+
+" This will enable code folding.
+" Use the marker method of folding.
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+" If the current file type is HTML, set indentation to 2 spaces.
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+
+" If Vim version is equal to or greater than 7.3 enable undofile.
+" This allows you to undo changes to a file even after saving it.
+if version >= 703
+    set undodir=~/.vim/backup
+    set undofile
+    set undoreload=10000
+endif
+
+" }}}
+
+" ============================================================================
+" STATUS LINE  {{{
+" ============================================================================
+
+" Clear status line when vimrc is reloaded.
+set statusline=
+
+" Status line left side.
+set statusline+=\ %F\ %M\ %Y\ %R
+
+" Use a divider to separate the left side from the right side.
+set statusline+=%=
+
+" Status line right side.
+set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+
+" Show the status on the second to last line.
+set laststatus=2
+
+" }}}
+

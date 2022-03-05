@@ -1,0 +1,39 @@
+ VIM='vim'
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
+export LC_ALL="en_US.UTF-8"
+export DOTFILES=$HOME/.dotfiles
+
+# Where should I put you?
+# bindkey -s ^f "tmux-sessionizer\n"
+bindkey -v
+
+# some aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias c='clear'
+alias md='mkdir'
+
+catr() {
+    tail -n "+$1" $3 | head -n "$(($2 - $1 + 1))"
+}
+
+cat1Line() {
+    cat $1 | tr -d "\n"
+}
+
+# ioloop() {
+#    FIFO=$(mktemp -u /tmp/ioloop_$$_XXXXXX ) &&
+#    trap "rm -f $FIFO" EXIT &&
+#    mkfifo $FIFO &&
+#    ( : <$FIFO & ) &&    # avoid deadlock on opening pipe
+#    exec >$FIFO <$FIFO
+#}
+
+# eslintify() {
+#    cat $1 > /tmp/file_to_eslint
+#    npx eslint
+#}

@@ -1,0 +1,31 @@
+# Comments and blank lines are allowed.
+# This two entries are just for the test dir
+.ziggy
+ziggy.*
+# ---------------------------------------- #
+
+# ======================================== #
+# Ignore patterns
+# ======================================== #
+# ----- GENERAL ----- #
+^/README.*
+^/LICENSE.*
+^/COPYING
+\.git
+\.gitignore
+# ----- VIM  ----- #
+#\.vimrc-example
+\.viminfo
+\.vimrc.*
+# ----- SHELL ----- #
+\.zsh_history
+\.bash_history
+# ---------------------------------------- #
+
+# ======================================== #
+# Special ignore for weird symlink
+# ======================================== #
+.face
+#^/.face.icon
+# ---------------------------------------- #
+

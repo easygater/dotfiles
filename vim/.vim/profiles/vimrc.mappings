@@ -1,0 +1,43 @@
+" Set the mapleader key to an empty space instead of an backslash or semicolon
+let mapleader = " "
+
+" Press \\ to jump back to the last cursor position.
+nnoremap <leader>\ ``
+
+" Yank from cursor to the end of line.
+nnoremap Y y$
+nnoremap D d$
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" ------------------------------------ "
+" NERTree Settings {{{
+" ------------------------------------ "
+" Simple NERDTree commands
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Start NERDTree when Vim is opened and leave the cursor in it.
+"autocmd VimEnter * NERDTree
+
+" Start NERDTree when Vim is opened and put the cursor back in the other window.
+"autocmd VimEnter * NERDTree | wincmd p
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+" Have nerdtree ignore certain files and directories.
+let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$',
+    \ '\.gif$', '\.db$']
+" }}}
+
